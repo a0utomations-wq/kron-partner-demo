@@ -1,47 +1,19 @@
+'use client'
+
+import Link from 'next/link'
+import { ArrowDown, ArrowRight, Quote } from 'lucide-react'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { ContactModal, Footer, Header, PropertyCard, SectionEyebrow, TrustStrip, ValuationSteps, properties } from '@/components/real-estate-shell'
+
 export default function Page() {
-  return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
-    </main>
-  )
+  const [contact, setContact] = useState(false)
+  return <><Header /><main>
+    <section className="relative overflow-hidden bg-muted"><div className="mx-auto grid min-h-[680px] max-w-7xl items-end gap-10 px-6 pb-16 pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:px-10 lg:pb-24"><div className="relative z-10"><SectionEyebrow>Nordhaus Immobilien · München</SectionEyebrow><h1 className="mt-6 max-w-3xl font-serif text-5xl leading-[1.03] tracking-tight md:text-7xl">Exzellenz in Immobilien.<br /><span className="text-muted-foreground">Diskret. Präzise.<br />Wertbeständig.</span></h1><p className="mt-8 max-w-md text-base leading-7 text-muted-foreground">Wir vermitteln außergewöhnliche Immobilien mit einem Gespür für Substanz, Lage und den richtigen Moment.</p><div className="mt-10 flex flex-wrap gap-3"><Button className="rounded-none px-6 py-6" asChild><Link href="#finden">Immobilie finden <ArrowRight data-icon="inline-end" /></Link></Button><Button variant="outline" className="rounded-none border-foreground px-6 py-6" onClick={() => setContact(true)}>Gespräch vereinbaren</Button></div></div><div className="relative hidden aspect-[4/5] overflow-hidden lg:block"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85" alt="Architektonische Villa am See" className="size-full object-cover" /><div className="absolute bottom-5 left-5 bg-background/90 px-4 py-3 text-xs uppercase tracking-[0.15em]">Private Residences · Starnberg</div></div></div></section>
+    <div className="mx-auto max-w-7xl px-6 lg:px-10"><TrustStrip /></div>
+    <section id="ueber-uns" className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-[0.8fr_1.2fr] lg:px-10 lg:py-32"><div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden bg-muted"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=85" alt="Porträt der Geschäftsführerin" className="size-full object-cover grayscale" /></div><div className="flex flex-col justify-center lg:pl-12"><SectionEyebrow>Über Nordhaus</SectionEyebrow><h2 className="mt-5 max-w-xl font-serif text-4xl leading-tight md:text-5xl">„Eine Immobilie ist niemals nur ein Objekt. Sie ist ein Kapitel im Leben.“</h2><div className="mt-8 flex items-start gap-4 border-l border-foreground pl-5"><Quote className="size-5 shrink-0" /><p className="max-w-md text-sm leading-6 text-muted-foreground">Wir hören zu, denken voraus und bleiben an Ihrer Seite — von der ersten Idee bis zur Schlüsselübergabe.</p></div><p className="mt-8 text-sm font-medium">— Anna Nordhaus, Geschäftsführerin</p></div></section>
+    <section id="finden" className="bg-muted"><div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32"><div className="flex flex-col justify-between gap-7 md:flex-row md:items-end"><div><SectionEyebrow>Ausgewählte Residenzen</SectionEyebrow><h2 className="mt-4 font-serif text-4xl md:text-5xl">Ihr neues Zuhause finden.</h2><p className="mt-4 text-sm text-muted-foreground">Kauf- und Mietobjekte in Premiumlagen.</p></div><Button variant="outline" className="w-fit rounded-none border-foreground" asChild><Link href="/kaufen">Alle Objekte ansehen <ArrowRight data-icon="inline-end" /></Link></Button></div><div className="mt-12 grid gap-8 md:grid-cols-3">{properties.slice(0, 3).map(p => <PropertyCard key={p.id} property={p} />)}</div></div></section>
+    <section className="mx-auto grid max-w-7xl gap-14 px-6 py-24 lg:grid-cols-[1fr_0.95fr] lg:px-10 lg:py-32"><div><SectionEyebrow>Immobilie veräußern</SectionEyebrow><h2 className="mt-5 max-w-xl font-serif text-4xl leading-tight md:text-5xl">Sie möchten Ihre Immobilie veräußern?</h2><p className="mt-6 max-w-md text-sm leading-7 text-muted-foreground">Erhalten Sie eine fundierte erste Einschätzung des Marktwerts — kostenfrei und unverbindlich.</p><ul className="mt-10 flex flex-col gap-4 text-sm"><li>01 · Präzise Marktanalyse Ihrer Lage</li><li>02 · Diskrete Ansprache geprüfter Interessenten</li><li>03 · Begleitung bis zur Übergabe</li></ul><Button variant="link" className="mt-8 h-auto rounded-none px-0" asChild><Link href="/verkaufen">Mehr über den Verkauf erfahren <ArrowRight data-icon="inline-end" /></Link></Button></div><ValuationSteps onComplete={query => window.location.href = `/verkaufen?${query}`} /></section>
+    <section className="border-y border-border bg-muted"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 px-6 py-16 md:flex-row md:items-center lg:px-10"><div><SectionEyebrow>Persönlicher Austausch</SectionEyebrow><h2 className="mt-3 font-serif text-3xl">Bereit für den nächsten Schritt?</h2></div><Button className="rounded-none px-6 py-6" onClick={() => setContact(true)}>Gespräch vereinbaren <ArrowRight data-icon="inline-end" /></Button></div></section>
+  </main><Footer />{contact && <ContactModal close={() => setContact(false)} />}</>
 }
